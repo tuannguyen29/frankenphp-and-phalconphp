@@ -26,6 +26,12 @@ It includes configurations for Caddy as a reverse proxy and load balancer.
 ├── mysql_data/             # Volume for MySQL
 
 ```
+- My development for this repository is based on the following environment:
+
+  * Windows 11 Pro
+  * Docker Desktop
+  * WSL2
+  * Ubuntu 24.04 LTS
 
 # Usage
 
