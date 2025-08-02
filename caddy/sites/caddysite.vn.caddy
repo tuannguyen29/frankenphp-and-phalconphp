@@ -1,0 +1,48 @@
+{
+	auto_https disable_redirects
+}
+
+http://caddysite.vn {
+	# reverse_proxy caddysite.vn:80
+
+	tls internal
+
+	root *  /data/caddysite.vn/public
+
+	handle_path /static-caddy/* {
+		root * /data/caddysite.vn/static/
+		file_server
+		header {
+				Access-Control-Allow-Origin *
+				Access-Control-Allow-Methods *
+				Access-Control-Allow-Headers *
+		}
+	}
+
+	@phpFiles path *.php
+	php_server @phpFiles
+
+	#	@staticphp path_regexp staticphp ^/static.*\.php$
+	#	respond @staticphp 403
+
+	# Block access to dotfiles (ví dụ .env)
+	@dotfiles path_regexp dotfiles ^/\.
+	respond @dotfiles 403
+
+	# Static assets: cache headers
+	@static path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.ttf *.eot *.svg *.woff
+	header @static {
+		Access-Control-Allow-Origin "*"
+		Cache-Control "public, must-revalidate, proxy-revalidate"
+		Pragma "public"
+	}
+
+	@rewriteToIndex {
+		not path /static-support/*
+		not file
+		not path *.php
+	}
+	rewrite @rewriteToIndex /index.php?_url={uri}&{query}
+	file_server
+	encode gzip
+}

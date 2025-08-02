@@ -1,0 +1,68 @@
+services:
+  franken:
+    build:
+      context: ./franken
+      dockerfile: Dockerfile
+    container_name: franken-container
+    ports:
+      - 81:80
+      - "443:443"
+      - "443:443/udp" # Optional: for HTTP/3
+    user: "1000:1000"
+    volumes:
+      - /data:/data
+      - ./franken/config:/config
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/sites:/etc/caddy/sites
+    environment:
+      - CADDY_STORAGE=file_system
+      - CADDY_STORAGE_ROOT=/data/caddy
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:latest
+    container_name: mysqldb-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: r0otPassw0rd
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: tuannguyen29
+      MYSQL_PASSWORD: xxxtuannguyen29
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest
+    container_name: redis-cache-container
+    restart: always
+    ports:
+      - "6380:6379"
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb-container
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo_tuannguyen29
+      MONGO_INITDB_ROOT_PASSWORD: r0otPassw0rd
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./mongo_data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  mongo_data:
