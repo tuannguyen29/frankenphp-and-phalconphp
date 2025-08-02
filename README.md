@@ -78,6 +78,6 @@ It includes configurations for Caddy as a reverse proxy and load balancer.
 - The setup is designed to be modular, allowing you to easily add or remove services as needed. You can also extend the functionality by integrating additional services like Redis, Elasticsearch, or others as required by your application.
 
 # Image
-![FrankenPHP and PhalconPHP Docker Compose Setup](https://raw.githubusercontent.com/tuannguyen29/frankenphp-and-phalconphp/main/images/frankenphp-phalconphp-docker-compose.png)
-![FrankenPHP and PhalconPHP Docker Compose Setup](https://raw.githubusercontent.com/tuannguyen29/frankenphp-and-phalconphp/main/images/frankenphp-phalconphp-docker-compose-2.png)
-![FrankenPHP and PhalconPHP Docker Compose Setup](https://raw.githubusercontent.com/tuannguyen29/frankenphp-and-phalconphp/main/images/frankenphp-phalconphp-docker-compose-3.png)
+![FrankenPHP and PhalconPHP Docker Compose Setup](https://raw.githubusercontent.com/tuannguyen29/frankenphp-and-phalconphp/master/images/frankenphp-phalconphp-docker-compose.png)
+![FrankenPHP and PhalconPHP Docker Compose Setup](https://raw.githubusercontent.com/tuannguyen29/frankenphp-and-phalconphp/master/images/frankenphp-phalconphp-docker-compose-2.png)
+![FrankenPHP and PhalconPHP Docker Compose Setup](https://raw.githubusercontent.com/tuannguyen29/frankenphp-and-phalconphp/master/images/frankenphp-phalconphp-docker-compose-3.png)
