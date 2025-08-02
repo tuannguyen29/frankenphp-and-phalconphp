@@ -3,8 +3,7 @@
 This repository contains a Docker Compose setup for running a Phalcon application with FrankenPHP, MySQL, Redis, and MongoDB.
 It includes configurations for Caddy as a reverse proxy and load balancer.
 
-<div style="background: url('https://frankenphp.dev/img/logo_darkbg.svg'); background-size: 100%; background-repeat: no-repeat;width: 100%; height: 111px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; background-color: rgb(35 1 67 / 1); text-align: center; padding: 20px; border-radius: 10px; padding: 10px">
-</div>
+![FrankenPHP](https://raw.githubusercontent.com/tuannguyen29/frankenphp-and-phalconphp/master/images/frankenphp-phalconphp.png)
 
 # Services
 
