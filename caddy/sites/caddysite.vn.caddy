@@ -25,7 +25,7 @@ http://caddysite.vn {
 	#	@staticphp path_regexp staticphp ^/static.*\.php$
 	#	respond @staticphp 403
 
-	# Block access to dotfiles (ví dụ .env)
+	# Block access to dotfiles (etc .env)
 	@dotfiles path_regexp dotfiles ^/\.
 	respond @dotfiles 403
 
@@ -38,7 +38,7 @@ http://caddysite.vn {
 	}
 
 	@rewriteToIndex {
-		not path /static-support/*
+		not path /static/*
 		not file
 		not path *.php
 	}

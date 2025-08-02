@@ -1,7 +1,10 @@
-# Phalcon FrankenPHP Docker Compose Setup
+# Phalcon + FrankenPHP + Docker Compose Setup
 
-This repository contains a Docker Compose setup for running a Phalcon application with FrankenPHP, MySQL, and MongoDB.
+This repository contains a Docker Compose setup for running a Phalcon application with FrankenPHP, MySQL, Redis, and MongoDB.
 It includes configurations for Caddy as a reverse proxy and load balancer.
+
+<div style="background: url('https://frankenphp.dev/img/logo_darkbg.svg'); background-size: 100%; background-repeat: no-repeat;width: 100%; height: 111px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; background-color: rgb(35 1 67 / 1); text-align: center; padding: 20px; border-radius: 10px; padding: 10px">
+</div>
 
 # Services
 
@@ -9,6 +12,20 @@ It includes configurations for Caddy as a reverse proxy and load balancer.
 - **mysql**: MySQL database service.
 - **mongo**: MongoDB database service.
 - **caddy**: Caddy web server for serving the application and handling HTTPS.
+- Structured to support:
+
+```text
+.
+├── docker-compose.yml
+├── caddy/                  # Caddy configuration
+│   ├── sites/
+│   │   ├── caddysite.vn/   # Config domain primary (index.php)
+│   │   └── localhost/      # Config localhost (index.php)
+│   └── Caddyfile
+├── mongo_data/             # Volume for MongoDB
+├── mysql_data/             # Volume for MySQL
+
+```
 
 # Usage
 
@@ -21,12 +38,16 @@ It includes configurations for Caddy as a reverse proxy and load balancer.
    ```bash
    docker-compose up -d --build
    ```
-3. Access the application at `http://localhost:81` or `https://localhost`.
+3. Access the application at `http://localhost:81` or at `http://caddysite.vn:81`
 4. For HTTPS, ensure you have valid SSL certificates or use Caddy's automatic HTTPS feature.
 5. To stop the services, run:
    ```bash
    docker-compose down
    ```
+6. Composer install: (optional, if you have a `composer.json` file in your project)
+    ```bash
+    docker exec -it -w /data/caddysite.vn/ franken composer install
+    ```
 
 # Configuration
 
@@ -38,6 +59,7 @@ It includes configurations for Caddy as a reverse proxy and load balancer.
 - **Networks**: All services are connected to a default network created by Docker Compose. You can customize the network settings if needed.
 - **Ports**: The services expose the following ports:
   - FrankenPHP: 81 (HTTP), 443 (HTTPS)
+  - Redis: 6380
   - MySQL: 3307
   - MongoDB: 27018
   - Caddy: 80, 443

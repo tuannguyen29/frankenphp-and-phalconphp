@@ -1,0 +1,14 @@
+http://localhost, 127.0.0.1, ::1 {
+	tls internal
+
+	root *  /data/localhost/public
+
+	@phpFiles path *.php
+	php_server @phpFiles
+
+	@rewriteToIndex {
+		not file
+		not path *.php
+	}
+	rewrite @rewriteToIndex /index.php?_url={uri}&{query}
+}
